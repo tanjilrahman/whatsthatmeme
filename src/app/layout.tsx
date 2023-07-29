@@ -28,6 +28,13 @@ export const metadata = {
   title: "What's That Meme?",
   description:
     "Get ready for laughter and creativity in 'What's That Meme?' - an AI-powered game where players generate hilarious memes using personalized contexts. Vote for your favorite meme to crown the champion of comedy!",
+  icons: {
+    icon: "/icon-512x512.png",
+    shortcut: "/icon-256x256.png",
+    apple: "/icon-512x512.png",
+  },
+  themeColor: "#3B4FFE",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

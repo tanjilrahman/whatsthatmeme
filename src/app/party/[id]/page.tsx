@@ -15,6 +15,7 @@ import { BiSolidExit } from "react-icons/bi";
 import LoadingPage from "@/components/ui/LoadingPage";
 import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
+import PWAInstallButton from "@/components/ui/PWAInstall";
 
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
@@ -89,6 +90,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
                 <p>Leave</p>
               </div>
             )}
+            <PWAInstallButton />
           </div>
         </header>
         {phase === 0 && (
