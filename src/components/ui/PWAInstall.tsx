@@ -1,4 +1,6 @@
+"use client";
 import { useEffect, useState } from "react";
+import { MdInstallMobile } from "react-icons/md";
 
 // Custom event type for BeforeInstallPromptEvent
 interface BeforeInstallPromptEvent extends Event {
@@ -31,12 +33,12 @@ const PWAInstallButton: React.FC = () => {
   };
 
   return (
-    <div>
-      {deferredPrompt && (
-        <button onClick={handleInstall} className="bg-blue-500 text-white rounded p-2">
-          Install App
-        </button>
-      )}
+    <div
+      onClick={handleInstall}
+      className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
+    >
+      <MdInstallMobile className="text-2xl mx-auto" />
+      <p>Install App</p>
     </div>
   );
 };

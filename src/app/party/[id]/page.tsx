@@ -85,7 +85,10 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
                 <p>Spectating</p>
               </div>
             ) : (
-              <div className="hover:text-orange-500 cursor-pointer" onClick={leaveParty}>
+              <div
+                className="hover:text-orange-500 cursor-pointer transition-colors duration-200 ease-in-out"
+                onClick={leaveParty}
+              >
                 <BiSolidExit className="text-2xl mx-auto" />
                 <p>Leave</p>
               </div>
