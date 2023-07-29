@@ -1,6 +1,10 @@
 "use client";
 
-import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from "react";
+
+type GlobalContextProviderProps = {
+  children: ReactNode;
+};
 
 interface ContextProps {
   phase: number;
@@ -40,7 +44,7 @@ const GlobalContext = createContext<ContextProps>({
   setRounds: (): Round[] => [],
 });
 
-export const GlobalContextProvider = ({ children }) => {
+export const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
   const [phase, setPhase] = useState(0);
   const [timer, setTimer] = useState(-1);
   const [appTimer, setAppTimer] = useState(-1);
