@@ -16,7 +16,7 @@ import LoadingPage from "@/components/ui/LoadingPage";
 import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
 
-export const Party = ({ params: { id } }: { params: { id: string } }) => {
+const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
     useGlobalContext();
   const [spectating, setSpectating] = useState(Boolean);
