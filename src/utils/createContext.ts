@@ -1,42 +1,62 @@
 import { db } from "@/config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { pickRandomPlayers } from "./functions";
+import { toast } from "react-toastify";
 
 export default async function createContext(players: PlayerInfo[], partyId: string, lang?: string): Promise<void> {
-  const generateMeme = async () => {
-    const gpt = await fetch("/api/gpt-meme", {
-      body: JSON.stringify({
-        contextOne: pickRandomPlayers(players.map((player) => player.name)),
-        contextTwo: pickRandomPlayers(players.map((player) => player.name)),
-        lang,
-      }),
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-    }).then((response) => response.json());
+  try {
+    const generateMeme = async () => {
+      const gpt = await fetch("/api/gpt-meme", {
+        body: JSON.stringify({
+          contextOne: pickRandomPlayers(players.map((player) => player.name)),
+          contextTwo: pickRandomPlayers(players.map((player) => player.name)),
+          lang,
+        }),
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }).then((response) => response.json());
 
-    return {
-      context: gpt.context,
+      return {
+        respose: gpt,
+      };
     };
-  };
 
-  const rawMemes = await generateMeme();
+    const data = await generateMeme();
 
-  const memes = JSON.parse(rawMemes.context);
+    if (data.respose.error) {
+      toast.error("API rate limit reached! Please try again in 20s.", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: true,
+        theme: "colored",
+        style: {
+          backgroundColor: "#3B4FFE",
+          color: "#FFFFFF",
+        },
+        progress: undefined,
+      });
+    } else {
+      console.log(data.respose.context);
+      const memes = JSON.parse(data.respose.context);
 
-  await updateDoc(doc(db, "parties", partyId), {
-    memes: [{ context: memes[0] }, { context: memes[1] }],
-  });
+      await updateDoc(doc(db, "parties", partyId), {
+        memes: [{ context: memes[0] }, { context: memes[1] }],
+      });
+    }
+  } catch (error: any) {
+    toast.error("ChatGPT r matha gese 🥴! Please try again.", {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      theme: "colored",
+      style: {
+        backgroundColor: "#3B4FFE",
+        color: "#FFFFFF",
+      },
+      progress: undefined,
+    });
+    console.error("Error occurred during context creation:", error);
+  }
 }
-
-// const gpt = await fetch(`/api/gpt-meme?players=${pickRandomPlayers(players.map((player) => player.name))}`, {
-//   method: "POST",
-//   headers: {
-//     "Content-type": "application/json",
-//   },
-// }).then((response) => response.json());
-
-// return {
-//   context: gpt.context,
-// };

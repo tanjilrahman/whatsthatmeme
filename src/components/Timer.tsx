@@ -69,7 +69,7 @@ export const Timer = () => {
   }
 
   return (
-    <div className="z-0 w-full h-1 bg-bgDark mx-auto relative overflow-hidden">
+    <div className="z-30 fixed top-0 w-full h-1 bg-bgDark mx-auto overflow-hidden">
       <div
         className={`${overlayWidth < 20 ? "bg-red-600" : overlayWidth < 40 ? "bg-orange-500" : "bg-primary"}
         h-[100%] -z-10 absolute top-0 left-0 transition-all duration-[1s] ease-linear`}

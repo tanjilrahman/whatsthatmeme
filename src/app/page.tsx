@@ -168,7 +168,7 @@ export default function Home() {
     return (
       <div className="text-center flex flex-col justify-between py-28 text-lg h-screen">
         <ProfileModal toggleModal={toggleModal} closeModal={closeModal} />
-        <div className="w-[300px] h-[120px] relative mx-auto">
+        <div className="w-[300px] h-[120px] md:w-[500px] md:h-64 relative mx-auto">
           <Image src="/logo.svg" fill alt="logo" className="object-contain" />
         </div>
         <div className="mx-auto">

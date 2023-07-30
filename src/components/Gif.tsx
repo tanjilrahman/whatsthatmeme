@@ -113,28 +113,32 @@ const Gif = () => {
             </div>
           )}
 
-          <div className={`${!toggleGif && "fixed bottom-0 md:bottom-28"} w-full md:w-[530px] mt-3 md:mt-6 `}>
+          <div className={`${!toggleGif && ""} w-full h-full mt-3 md:mt-6 `}>
             <div
               onClick={toggleGifPicker}
               className={`${
-                !toggleGif && "md:rounded-b-xl"
-              } h-[35px] w-full bg-bgLight border-b border-gray-700 rounded-t-xl -mb-[5px] flex justify-center items-center cursor-pointer`}
+                !toggleGif
+                  ? "md:rounded-b-xl fixed bottom-0 w-[530px] left-1/2 transform -translate-x-1/2"
+                  : "w-full md:w-[96%]"
+              } h-[35px]  mx-auto bg-bgLight border-b border-gray-700 rounded-t-xl -mb-[5px] flex justify-center items-center cursor-pointer`}
             >
               <div className="h-[6px] w-[55px] rounded-full bg-bgLit mb-[5px]" />
             </div>
-            {toggleGif && (
-              <div className="w-full md:h-full">
-                <GifPicker
-                  tenorApiKey={process.env.NEXT_PUBLIC_TENORAPIKEY || ""}
-                  onGifClick={(tenorImage) => handleGifClick(tenorImage)}
-                  theme={Theme.DARK}
-                  width="100%"
-                  categoryHeight={80}
-                  country="US"
-                  autoFocusSearch={false}
-                />
-              </div>
-            )}
+            <div
+              className={`${
+                toggleGif ? "block" : "hidden"
+              } w-full md:w-[96%] md:h-full transition-all duration-200 ease-in-out mx-auto`}
+            >
+              <GifPicker
+                tenorApiKey={process.env.NEXT_PUBLIC_TENORAPIKEY || ""}
+                onGifClick={(tenorImage) => handleGifClick(tenorImage)}
+                theme={Theme.DARK}
+                width="100%"
+                height="100%"
+                country="US"
+                autoFocusSearch={false}
+              />
+            </div>
           </div>
         </div>
       )}
