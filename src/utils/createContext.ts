@@ -26,17 +26,31 @@ export default async function createContext(players: PlayerInfo[], partyId: stri
     const data = await generateMeme();
 
     if (data.respose.error) {
-      toast.error("API rate limit reached! Please try again in 20s.", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: true,
-        theme: "colored",
-        style: {
-          backgroundColor: "#3B4FFE",
-          color: "#FFFFFF",
-        },
-        progress: undefined,
-      });
+      if (data.respose.error.status === 429) {
+        toast.error("API rate limit reached! Please try again in 20s.", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: true,
+          theme: "colored",
+          style: {
+            backgroundColor: "#3B4FFE",
+            color: "#FFFFFF",
+          },
+          progress: undefined,
+        });
+      } else {
+        toast.error("Something went wrong! Please try again later.", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: true,
+          theme: "colored",
+          style: {
+            backgroundColor: "#3B4FFE",
+            color: "#FFFFFF",
+          },
+          progress: undefined,
+        });
+      }
     } else {
       console.log(data.respose.context);
       const memes = JSON.parse(data.respose.context);
