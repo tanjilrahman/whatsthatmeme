@@ -15,7 +15,7 @@ import { BiSolidExit } from "react-icons/bi";
 import LoadingPage from "@/components/ui/LoadingPage";
 import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
-import PWAInstallButton from "@/components/ui/PWAInstall";
+import { MdInstallMobile } from "react-icons/md";
 
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
@@ -25,6 +25,34 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   const [placeholder, setPlaceholder] = useState(0);
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(false);
+
+  interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    prompt(): Promise<void>;
+  }
+
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+
+  useEffect(() => {
+    // Event handler to capture the beforeinstallprompt event
+    const handleBeforeInstallPrompt = (event: Event) => {
+      const beforeInstallEvent = event as BeforeInstallPromptEvent;
+      event.preventDefault();
+      setDeferredPrompt(beforeInstallEvent);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstall = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+    }
+  };
 
   useEffect(() => {
     const cachedUserName = localStorage.getItem("playerName");
@@ -93,7 +121,17 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
                 <p>Leave</p>
               </div>
             )}
-            <PWAInstallButton />
+            <div>
+              {deferredPrompt && (
+                <div
+                  onClick={handleInstall}
+                  className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
+                >
+                  <MdInstallMobile className="text-2xl mx-auto" />
+                  <p>Install</p>
+                </div>
+              )}
+            </div>
           </div>
         </header>
         {phase === 0 && (
