@@ -36,11 +36,10 @@ const VoteGif = () => {
 
     if (timer == 0 && phase == 5 && playersNotVoted.length > 0) {
       const voteGif = async () => {
-        const randomPlayer = randomPlayerWithGif(players);
         const updatedPlayers = players.map((player) => ({
           ...player,
-          voteGifPlayer: player.voteGifPlayer === null ? randomPlayer : player.voteGifPlayer,
-          points: player.name === randomPlayer ? player.points + 100 : player.points,
+          voteGifPlayer: player.voteGifPlayer === null ? randomPlayerWithGif(players) : player.voteGifPlayer,
+          points: player.name === randomPlayerWithGif(players) ? player.points + 100 : player.points,
         }));
 
         await updateDoc(doc(db, "parties", partyId), {

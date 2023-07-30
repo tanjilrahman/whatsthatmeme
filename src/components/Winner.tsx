@@ -51,7 +51,7 @@ const Winner = () => {
       </div>
 
       <div className="bg-bgLight p-4 md:p-5 space-y-4 rounded-3xl mt-12 md:mx-8">
-        {sortedPlayers.slice(0).map((player, i) => (
+        {sortedPlayers.slice(3).map((player, i) => (
           <div className="flex items-center text-left bg-bgDark px-4 py-3 rounded-xl">
             <div className="flex items-center flex-grow">
               <div className="w-14 h-14 md:w-16 md:h-16 bg-slate-400 rounded-full mb-2 relative">

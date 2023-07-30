@@ -1,5 +1,5 @@
 const ColoredMemeContext = ({ meme, players }: { meme: string; players: PlayerInfo[] }) => {
-  const cleanWord = (word: string) => word.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, "");
+  const cleanWord = (word: string) => word.replace(/[^a-zA-Z0-9']+/, "").replace(/['s]*$/, "");
 
   const contextWords = meme.split(" ");
 
