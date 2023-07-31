@@ -13,7 +13,7 @@ export default function ProfileModal({ toggleModal, closeModal }: { toggleModal:
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
 
   const generateAvatar = () => {
-    const src = generateRandomString(10);
+    const src = generateRandomString();
     localStorage.setItem("avatar", src);
     setAvatar(src);
   };

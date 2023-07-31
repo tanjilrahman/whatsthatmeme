@@ -42,23 +42,23 @@ export const Timer = () => {
 
   if (appTimer > 0) {
     if (phase === 1) {
-      overlayWidth = ((appTimer - 1) / 20) * 100;
+      overlayWidth = ((appTimer - 1) / 20) * 110;
     }
     // if (phase === 2) {
     //   overlayWidth = ((appTimer - 1) / 5) * 100;
     // }
     if (phase === 3) {
-      overlayWidth = ((appTimer - 1) / 90) * 100;
+      overlayWidth = ((appTimer - 1) / 90) * 102;
     }
     if (phase === 4) {
       const participatingPlayers = players.filter((player) => player.gifUrl).length;
-      overlayWidth = ((appTimer - 1) / (participatingPlayers * 5)) * 100;
+      overlayWidth = ((appTimer - 1) / (participatingPlayers * 5)) * 110;
     }
     if (phase === 5) {
-      overlayWidth = ((appTimer - 1) / 15) * 100;
+      overlayWidth = ((appTimer - 1) / 15) * 110;
     }
     if (phase === 6) {
-      overlayWidth = ((appTimer - 1) / 10) * 100;
+      overlayWidth = ((appTimer - 1) / 10) * 110;
     }
     // if (phase === 7) {
     //   overlayWidth = ((appTimer - 1) / 15) * 100;

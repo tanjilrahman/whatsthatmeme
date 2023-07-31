@@ -11,8 +11,9 @@ export function generatePartyCode(): string {
   return code;
 }
 
-export function generateRandomString(length: number): string {
+export function generateRandomString(): string {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const length = Math.floor(Math.random() * 20) + 2;
   let result = "";
 
   for (let i = 0; i < length; i++) {

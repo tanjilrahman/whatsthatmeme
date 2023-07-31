@@ -16,6 +16,7 @@ import LoadingPage from "@/components/ui/LoadingPage";
 import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
 import { MdInstallMobile } from "react-icons/md";
+import PageAnimation from "@/components/ui/PageAnimation";
 
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
@@ -25,7 +26,6 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   const [placeholder, setPlaceholder] = useState(0);
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(false);
-
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
     prompt(): Promise<void>;
@@ -183,6 +183,8 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         {(phase == 0 || phase == 7) && <Start />}
         {phase == 1 && <RegenerateModal />}
       </div>
+
+      <PageAnimation />
     </section>
   );
 };
