@@ -5,7 +5,6 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ColoredMemeContext from "./ui/ColoredMemeContext";
-import LanguageDropdown from "./ui/LanguageDropdown";
 
 const Meme = () => {
   const { userName, partyId, memes, players, rounds, timer, appTimer, phase, setTimer } = useGlobalContext();

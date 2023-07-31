@@ -101,39 +101,42 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   return (
     <section className="text-center flex flex-col justify-between">
       <section>
-        {phase != 0 && <Timer />}
-        <header className="flex justify-between items-center px-6 md:px-8 pb-4 md:pb-6 pt-4 md:pt-6">
-          <div className="w-[135px] h-[62px] relative ">
-            <Image src="/logo.svg" fill alt="logo" className="object-contain" />
-          </div>
-          <div className="flex text-textDark font-normal space-x-4">
-            {spectating ? (
-              <div>
-                <AiFillEye className="text-2xl mx-auto" />
-                <p>Spectating</p>
-              </div>
-            ) : (
-              <div
-                className="hover:text-orange-500 cursor-pointer transition-colors duration-200 ease-in-out"
-                onClick={leaveParty}
-              >
-                <BiSolidExit className="text-2xl mx-auto" />
-                <p>Leave</p>
-              </div>
-            )}
-            <div>
-              {deferredPrompt && (
+        <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
+          {phase != 0 && <Timer />}
+          <div className="flex justify-between items-center px-6 md:px-8 pb-4 md:pb-6 pt-4 md:pt-6">
+            <div className="w-[135px] h-[62px] relative ">
+              <Image src="/logo.svg" fill alt="logo" className="object-contain" />
+            </div>
+            <div className="flex text-textDark font-normal space-x-4">
+              {spectating ? (
+                <div>
+                  <AiFillEye className="text-2xl mx-auto" />
+                  <p>Spectating</p>
+                </div>
+              ) : (
                 <div
-                  onClick={handleInstall}
-                  className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
+                  className="hover:text-orange-500 cursor-pointer transition-colors duration-200 ease-in-out"
+                  onClick={leaveParty}
                 >
-                  <MdInstallMobile className="text-2xl mx-auto" />
-                  <p>Install</p>
+                  <BiSolidExit className="text-2xl mx-auto" />
+                  <p>Leave</p>
                 </div>
               )}
+              <div>
+                {deferredPrompt && (
+                  <div
+                    onClick={handleInstall}
+                    className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
+                  >
+                    <MdInstallMobile className="text-2xl mx-auto" />
+                    <p>Install</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </header>
+        <div className="mt-28" />
         {phase === 0 && (
           <div>
             <div className="space-y-4 mt-4 mb-12">

@@ -10,6 +10,8 @@ import VoteGif from "./VoteGif";
 import Winner from "./Winner";
 import { TiTick } from "react-icons/ti";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { Drawer } from "vaul";
+import Button from "./ui/Button";
 
 const Gif = () => {
   const { userName, partyId, players, setTimer, timer, phase, setPhase } = useGlobalContext();
@@ -103,43 +105,41 @@ const Gif = () => {
               </div>
             ))}
           </div>
-          {!toggleGif && (
-            <div className="w-full h-[358px] md:h-[480px] mt-3 md:mt-6 relative md:border-8 md:border-bgLight md:bg-bgLit rounded-xl">
-              <AiOutlinePlusCircle
-                onClick={toggleGifPicker}
-                className="text-8xl text-gray-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-              />
-              {gifUrl && <Image src={gifUrl} alt="gif" fill className="object-contain mx-auto" />}
-            </div>
-          )}
 
-          <div className={`${!toggleGif && ""} w-full h-full mt-3 md:mt-6 `}>
-            <div
-              onClick={toggleGifPicker}
-              className={`${
-                !toggleGif
-                  ? "md:rounded-b-xl fixed bottom-0 w-[530px] left-1/2 transform -translate-x-1/2"
-                  : "w-full md:w-[96%]"
-              } h-[35px]  mx-auto bg-bgLight border-b border-gray-700 rounded-t-xl -mb-[5px] flex justify-center items-center cursor-pointer`}
-            >
-              <div className="h-[6px] w-[55px] rounded-full bg-bgLit mb-[5px]" />
-            </div>
-            <div
-              className={`${
-                toggleGif ? "block" : "hidden"
-              } w-full md:w-[96%] md:h-full transition-all duration-200 ease-in-out mx-auto`}
-            >
-              <GifPicker
-                tenorApiKey={process.env.NEXT_PUBLIC_TENORAPIKEY || ""}
-                onGifClick={(tenorImage) => handleGifClick(tenorImage)}
-                theme={Theme.DARK}
-                width="100%"
-                height="100%"
-                country="US"
-                autoFocusSearch={false}
-              />
-            </div>
+          <div className="w-full h-[358px] md:h-[480px] mt-3 md:mt-6 relative md:border-8 md:border-bgLight md:bg-bgLit rounded-xl">
+            {gifUrl && <Image src={gifUrl} alt="gif" fill className="object-contain mx-auto" />}
           </div>
+
+          <Drawer.Root shouldScaleBackground>
+            <Drawer.Trigger asChild className="">
+              <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
+                <button className="w-[295px]">
+                  <Button text="Select Gif" alt={true} />
+                </button>
+              </div>
+            </Drawer.Trigger>
+            <Drawer.Portal>
+              <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+              <Drawer.Content className="bg-bgDark flex flex-col fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-xl">
+                <div className="bg-bgDark py-3 md:py-5 rounded-t-xl">
+                  <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 " />
+                </div>
+                <div className="w-full mx-auto flex flex-col overflow-auto rounded-t-xl">
+                  <div className="w-full px-3">
+                    <GifPicker
+                      tenorApiKey={process.env.NEXT_PUBLIC_TENORAPIKEY || ""}
+                      onGifClick={(tenorImage) => handleGifClick(tenorImage)}
+                      theme={Theme.DARK}
+                      width="100%"
+                      height="100%"
+                      country="US"
+                      autoFocusSearch={false}
+                    />
+                  </div>
+                </div>
+              </Drawer.Content>
+            </Drawer.Portal>
+          </Drawer.Root>
         </div>
       )}
       {phase == 4 && <SlideShow />}
