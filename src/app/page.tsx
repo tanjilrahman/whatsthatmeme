@@ -5,12 +5,12 @@ import { addDoc, updateDoc, collection, doc, query, where, getDocs, arrayUnion }
 import { generatePartyCode } from "@/utils/functions";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "./context/store";
-import Image from "next/image";
 import { HiPencilAlt } from "react-icons/hi";
 import ProfileModal from "@/components/ui/ProfileModal";
 import LoadingPage from "@/components/ui/LoadingPage";
 import Button from "@/components/ui/Button";
 import { toast } from "react-toastify";
+import Logo from "@/components/logo/Logo";
 
 export default function Home() {
   const router = useRouter();
@@ -89,7 +89,7 @@ export default function Home() {
         hideProgressBar: true,
         theme: "colored",
         style: {
-          backgroundColor: "#3B4FFE",
+          backgroundColor: "#A374FF",
           color: "#FFFFFF",
         },
         progress: undefined,
@@ -109,7 +109,7 @@ export default function Home() {
           hideProgressBar: true,
           theme: "colored",
           style: {
-            backgroundColor: "#3B4FFE",
+            backgroundColor: "#A374FF",
             color: "#FFFFFF",
           },
           progress: undefined,
@@ -176,15 +176,13 @@ export default function Home() {
             className="absolute inset-x-16 inset-y-0 w-16 rounded-full rotate-45 ml-auto  bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
           />
         </div> */}
-
+        <Logo />
         <ProfileModal toggleModal={toggleModal} closeModal={closeModal} />
-        <div className="w-[300px] h-[120px] md:w-[500px] md:h-64 relative mx-auto">
-          <Image src="/logo.svg" fill alt="logo" className="object-contain" />
-        </div>
+
         <div className="mx-auto">
-          <div className="mb-4">
+          <div className="mb-5">
             {userName && (
-              <div className="flex items-center justify-center space-x-2">
+              <div className="flex text-xl items-center justify-center space-x-2 text-textDark">
                 <p>
                   What's up, <span className="underline">{userName}</span>
                 </p>{" "}
@@ -204,7 +202,7 @@ export default function Home() {
               value={codeInput}
               onKeyDown={handleKeyDown}
               onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
-              className="text-center bg-bgLight border-none mb-4 outline-none"
+              className="text-center text-xl bg-bgLight border-none mb-4 outline-none"
               placeholder="Enter Code"
             />
             <button onClick={() => joinParty(codeInput)} className="w-full">

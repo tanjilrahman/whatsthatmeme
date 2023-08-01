@@ -4,20 +4,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalContextProvider } from "./context/store";
 
-const RFDewi = localFont({
+const AntiqueOlive = localFont({
   src: [
     {
-      path: "../../fonts/RFDewiExtended-Black.woff2",
-      style: "normal",
-      weight: "900",
-    },
-    {
-      path: "../../fonts/RFDewiExtended-Bold.woff2",
+      path: "../../fonts/AQBL.ttf",
       style: "normal",
       weight: "700",
     },
     {
-      path: "../../fonts/RFDewi-Regular.woff2",
+      path: "../../fonts/Matter-SemiBold.ttf",
       style: "normal",
       weight: "400",
     },
@@ -33,14 +28,14 @@ export const metadata = {
     shortcut: "/icon-256x256.png",
     apple: "/icon-512x512.png",
   },
-  themeColor: "#3B4FFE",
+  themeColor: "#A374FF",
   manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${RFDewi.className} bg-bgDark font-bold  text-textLight`}>
+      <body className={`${AntiqueOlive.className} font-normal bg-bgDark text-textLight`}>
         <GlobalContextProvider>{children}</GlobalContextProvider>
         <ToastContainer />
       </body>

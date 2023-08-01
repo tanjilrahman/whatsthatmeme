@@ -151,7 +151,7 @@ const RegenerateModal = () => {
       )}
       {
         <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
-          <button className="rounded-xl w-[295px] py-[15px] bg-bgLight" onClick={() => regenerate(true)}>
+          <button className="rounded-xl w-[295px] py-[15px] bg-bgLight text-xl" onClick={() => regenerate(true)}>
             Regenerate
           </button>
         </div>

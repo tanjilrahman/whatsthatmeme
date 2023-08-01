@@ -18,6 +18,7 @@ import NotFoundPage from "@/components/ui/NotFoundPage";
 import { MdInstallMobile } from "react-icons/md";
 import PageAnimation from "@/components/ui/PageAnimation";
 import { motion } from "framer-motion";
+import LogoHeader from "@/components/logo/LogoHeader";
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
     useGlobalContext();
@@ -114,9 +115,10 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
           {phase != 0 && <Timer />}
           <div className="flex justify-between items-center px-6 md:px-8 pb-4 md:pb-6 pt-4 md:pt-6">
-            <div className="w-[135px] h-[62px] relative ">
-              <Image src="/logo.svg" fill alt="logo" className="object-contain" />
+            <div>
+              <LogoHeader />
             </div>
+
             <div className="flex text-textDark font-normal space-x-4">
               {spectating ? (
                 <div>
@@ -146,18 +148,18 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
             </div>
           </div>
         </header>
-        <div className="mt-28" />
+        <div className="mt-24 md:mt-36" />
         {phase === 0 && (
           <div>
-            <div className="space-y-4 mt-4 mb-12">
-              <p className="text-2xl font-bold">Party Code</p>
+            <div className="space-y-3 md:space-y-4 mt-4 mb-10 md:mb-12">
+              <p className="text-xl md:text-2xl font-bold">Party Code</p>
               <p className="py-3 bg-bgLight inline-block tracking-[35px] pl-[35px] rounded-xl border border-gray-700">
                 {party?.data()?.code}
               </p>
             </div>
 
-            <div className="space-y-5 mb-6 max-w-xs lg:max-w-sm mx-auto">
-              <p className="text-2xl font-bold">Players</p>
+            <div className="space-y-3 md:space-y-5 mb-6 max-w-xs lg:max-w-sm mx-auto">
+              <p className="text-xl md:text-2xl font-bold">Players</p>
               <div className="grid grid-cols-4 gap-4">
                 {players.map((player, i) => (
                   <motion.div
@@ -180,10 +182,20 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
                   </motion.div>
                 ))}
                 {Array.from({ length: placeholder }).map((_, index) => (
-                  <div key={index} className="flex flex-col items-center">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { ease: "easeInOut", duration: 0.3 },
+                    }}
+                    exit={{ opacity: 0 }}
+                    transition={{ ease: "easeInOut", duration: 0.3 }}
+                    key={index}
+                    className="flex flex-col items-center"
+                  >
                     <div className="w-14 h-14 lg:w-16 lg:h-16 border border-dashed border-slate-600 rounded-full mb-2 relative" />
                     <div className=" h-4 w-14 bg-bgLight rounded-xl mt-[6px] md:mt-[8px]" />
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -191,7 +203,11 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         )}
 
         {phase != 0 && (
-          <p className={`${phase == 7 ? "text-center" : "text-left"} max-w-xl mx-auto px-6 text-xl md:text-2xl`}>
+          <p
+            className={`${
+              phase == 7 ? "text-center" : "text-left"
+            } max-w-xl mx-auto px-6 text-xl md:text-2xl font-bold`}
+          >
             {phase === 1 && "Select Meme"} {phase === 3 && "Pick a GIF"} {phase === 4 && "Slideshow"}
             {phase === 5 && "Vote"}
             {phase === 6 && "Round Winner 🎉"}

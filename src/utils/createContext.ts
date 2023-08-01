@@ -41,7 +41,7 @@ export default async function createContext(
             hideProgressBar: true,
             theme: "colored",
             style: {
-              backgroundColor: "#3B4FFE",
+              backgroundColor: "#A374FF",
               color: "#FFFFFF",
             },
             progress: undefined,
@@ -53,7 +53,7 @@ export default async function createContext(
             hideProgressBar: true,
             theme: "colored",
             style: {
-              backgroundColor: "#3B4FFE",
+              backgroundColor: "#A374FF",
               color: "#FFFFFF",
             },
             progress: undefined,
@@ -84,7 +84,7 @@ export default async function createContext(
           hideProgressBar: true,
           theme: "colored",
           style: {
-            backgroundColor: "#3B4FFE",
+            backgroundColor: "#A374FF",
             color: "#FFFFFF",
           },
           progress: undefined,

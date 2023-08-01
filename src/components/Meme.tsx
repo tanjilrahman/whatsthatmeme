@@ -123,7 +123,7 @@ const Meme = () => {
 
   return (
     <>
-      <div className="mt-5 max-w-xl text-base md:text-xl px-6 mx-auto">
+      <div className="mt-4 md:mt-5 max-w-xl text-lg leading-tight md:text-2xl px-6 mx-auto">
         {phase > 0 && phase < 3 && (
           <div>
             {memes.length != 0 ? (

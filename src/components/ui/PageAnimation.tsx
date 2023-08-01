@@ -6,7 +6,7 @@ const PageAnimation = () => {
   const { phase } = useGlobalContext();
   return (
     <div>
-      {phase === 0 && (
+      {/* {phase === 0 && (
         <div>
           <motion.div
             initial={{ scaleY: 2 }}
@@ -21,7 +21,7 @@ const PageAnimation = () => {
             className="fixed top-0 left-0 right-0 bottom-0 bg-bgDark z-30"
           />
         </div>
-      )}
+      )} */}
       {phase === 1 && (
         <div>
           <motion.div

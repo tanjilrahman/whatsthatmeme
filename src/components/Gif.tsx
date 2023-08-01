@@ -102,7 +102,7 @@ const Gif = () => {
             ))}
           </div>
 
-          <div className="w-full h-[358px] md:h-[480px] mt-3 md:mt-6 relative md:border-8 md:border-bgLight md:bg-bgLit rounded-xl">
+          <div className="w-full h-[358px] md:h-[480px] mt-3 md:mt-6 mb-36 relative md:border-8 md:border-bgLight md:bg-bgLit rounded-xl">
             {gifUrl && <Image src={gifUrl} alt="gif" fill className="object-contain mx-auto" />}
           </div>
 
