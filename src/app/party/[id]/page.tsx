@@ -100,7 +100,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   if (!party?.data()?.code) return <NotFoundPage />;
   return (
     <section className="text-center flex flex-col justify-between">
-      <div className="overflow-hidden">
+      {/* <div className="overflow-hidden">
         <div
           aria-hidden={true}
           className="absolute inset-y-16 inset-x-0 w-16 rounded-full rotate-45 bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
@@ -109,7 +109,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
           aria-hidden={true}
           className="absolute inset-x-16 inset-y-0 w-16 rounded-full rotate-45 ml-auto  bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
         />
-      </div>
+      </div> */}
       <section>
         <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
           {phase != 0 && <Timer />}
