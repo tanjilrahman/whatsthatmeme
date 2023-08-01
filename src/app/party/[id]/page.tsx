@@ -17,7 +17,7 @@ import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
 import { MdInstallMobile } from "react-icons/md";
 import PageAnimation from "@/components/ui/PageAnimation";
-
+import { motion } from "framer-motion";
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
     useGlobalContext();
@@ -100,6 +100,16 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   if (!party?.data()?.code) return <NotFoundPage />;
   return (
     <section className="text-center flex flex-col justify-between">
+      <div className="overflow-hidden">
+        <div
+          aria-hidden={true}
+          className="absolute inset-y-16 inset-x-0 w-16 rounded-full rotate-45 bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
+        />
+        <div
+          aria-hidden={true}
+          className="absolute inset-x-16 inset-y-0 w-16 rounded-full rotate-45 ml-auto  bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
+        />
+      </div>
       <section>
         <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
           {phase != 0 && <Timer />}
@@ -150,14 +160,24 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
               <p className="text-2xl font-bold">Players</p>
               <div className="grid grid-cols-4 gap-4">
                 {players.map((player, i) => (
-                  <div key={i} className="flex flex-col items-center">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { ease: "easeInOut", duration: 0.3 },
+                    }}
+                    exit={{ opacity: 0 }}
+                    transition={{ ease: "easeInOut", duration: 0.3 }}
+                    key={i}
+                    className="flex flex-col items-center"
+                  >
                     <div className="w-14 h-14 lg:w-16 lg:h-16 bg-slate-400 rounded-full mb-2 relative">
                       <Image src={`https://api.multiavatar.com/${player.avatar}.png`} alt="avatar" fill />
                     </div>
                     <p className="font-normal text-textDark text-base lg:text-lg max-w-[65px] text-center">
                       {player.name}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
                 {Array.from({ length: placeholder }).map((_, index) => (
                   <div key={index} className="flex flex-col items-center">

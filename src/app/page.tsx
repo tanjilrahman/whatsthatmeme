@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { db } from "@/config/firebase";
 import { addDoc, updateDoc, collection, doc, query, where, getDocs, arrayUnion } from "firebase/firestore";
@@ -167,6 +166,17 @@ export default function Home() {
   } else {
     return (
       <div className="text-center flex flex-col justify-between py-28 text-lg h-screen">
+        {/* <div className="overflow-hidden">
+          <div
+            aria-hidden={true}
+            className="absolute inset-y-16 inset-x-0 w-16 rounded-full rotate-45 bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
+          />
+          <div
+            aria-hidden={true}
+            className="absolute inset-x-16 inset-y-0 w-16 rounded-full rotate-45 ml-auto  bg bg-gradient-to-b from-pink-500 to-purple-600 blur-3xl opacity-50"
+          />
+        </div> */}
+
         <ProfileModal toggleModal={toggleModal} closeModal={closeModal} />
         <div className="w-[300px] h-[120px] md:w-[500px] md:h-64 relative mx-auto">
           <Image src="/logo.svg" fill alt="logo" className="object-contain" />

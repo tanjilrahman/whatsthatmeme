@@ -1,5 +1,5 @@
 import { useGlobalContext } from "@/app/context/store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GifPicker, { TenorImage, Theme } from "gif-picker-react";
 import Image from "next/image";
 import { doc, updateDoc } from "firebase/firestore";
@@ -9,19 +9,19 @@ import SlideShow from "./SlideShow";
 import VoteGif from "./VoteGif";
 import Winner from "./Winner";
 import { TiTick } from "react-icons/ti";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Drawer } from "vaul";
 import Button from "./ui/Button";
 
 const Gif = () => {
   const { userName, partyId, players, setTimer, timer, phase, setPhase } = useGlobalContext();
   const [gifUrl, setGifUrl] = useState<string | null>();
-  const [toggleGif, setToggleGif] = useState(true);
   const isHost = players[0]?.name === userName;
+  const drawerTrigger = useRef<HTMLButtonElement>(null);
 
   const handleGifClick = async (tenorImage: TenorImage) => {
-    console.log(tenorImage);
-    setToggleGif(false);
+    if (drawerTrigger.current) {
+      drawerTrigger.current.click();
+    }
     setGifUrl(tenorImage.preview.url);
     const updatedPlayers = players.map((player) => ({
       ...player,
@@ -29,10 +29,6 @@ const Gif = () => {
     }));
 
     await updateDoc(doc(db, "parties", partyId), { players: updatedPlayers });
-  };
-
-  const toggleGifPicker = () => {
-    toggleGif ? setToggleGif(false) : setToggleGif(true);
   };
 
   useEffect(() => {
@@ -111,7 +107,7 @@ const Gif = () => {
           </div>
 
           <Drawer.Root shouldScaleBackground>
-            <Drawer.Trigger asChild className="">
+            <Drawer.Trigger asChild ref={drawerTrigger}>
               <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
                 <button className="w-[295px]">
                   <Button text="Select Gif" alt={true} />
