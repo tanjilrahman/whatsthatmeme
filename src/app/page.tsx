@@ -17,7 +17,8 @@ export default function Home() {
   const [codeInput, setCodeInput] = useState("");
   const [rehydration, setRehydration] = useState(false);
   const partiesCollectionRef = collection(db, "parties");
-  const { userName, setUserName, setRounds, setMemes, setPlayers, setPhase, setTimer } = useGlobalContext();
+  const { userName, setUserName, setRounds, setMemes, setPlayers, setPhase, setTimer, isFirstVisit, setIsFirstVisit } =
+    useGlobalContext();
   const [pageLoading, setPageLoading] = useState(false);
 
   const [toggleModal, setToggleModal] = useState(false);
@@ -40,6 +41,10 @@ export default function Home() {
 
     if (cachedUserName) {
       setUserName(cachedUserName);
+    } else if (!isFirstVisit) {
+      setPageLoading(true);
+      setIsFirstVisit(true);
+      router.push("/welcome");
     }
     setRounds([]);
     setMemes([]);
@@ -165,7 +170,7 @@ export default function Home() {
     return <LoadingPage />;
   } else {
     return (
-      <div className="text-center flex flex-col justify-between py-28 text-lg h-screen">
+      <div className="text-center flex flex-col justify-between py-20 md:py-24 text-lg h-screen">
         {/* <div className="overflow-hidden">
           <div
             aria-hidden={true}
@@ -195,7 +200,7 @@ export default function Home() {
               <Button text="Create Party" alt={false} />
             </button>
           </div>
-          <p className="text-xl text-bgLit my-4">or,</p>
+          <p className="text-xl text-bgLit my-2 md:my-4">or,</p>
           <div className="w-[295px] p-4 bg-bgLight rounded-xl mx-auto">
             <input
               type="text"
@@ -209,6 +214,9 @@ export default function Home() {
               <Button text="Join Party" alt={true} />
             </button>
           </div>
+          <button className=" text-bgLit mt-2 underline cursor-pointer" onClick={() => router.push("/welcome")}>
+            How to play?
+          </button>
         </div>
       </div>
     );
