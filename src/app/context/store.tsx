@@ -7,6 +7,8 @@ type GlobalContextProviderProps = {
 };
 
 interface ContextProps {
+  isFirstVisit: boolean;
+  setIsFirstVisit: Dispatch<SetStateAction<boolean>>;
   phase: number;
   setPhase: Dispatch<SetStateAction<number>>;
   timer: number;
@@ -26,6 +28,8 @@ interface ContextProps {
 }
 
 const GlobalContext = createContext<ContextProps>({
+  isFirstVisit: false,
+  setIsFirstVisit: (): boolean => false,
   phase: 0,
   setPhase: (): number => 0,
   timer: -1,
@@ -45,6 +49,7 @@ const GlobalContext = createContext<ContextProps>({
 });
 
 export const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [phase, setPhase] = useState(0);
   const [timer, setTimer] = useState(-1);
   const [appTimer, setAppTimer] = useState(-1);
@@ -57,6 +62,8 @@ export const GlobalContextProvider = ({ children }: GlobalContextProviderProps) 
   return (
     <GlobalContext.Provider
       value={{
+        isFirstVisit,
+        setIsFirstVisit,
         phase,
         setPhase,
         timer,
