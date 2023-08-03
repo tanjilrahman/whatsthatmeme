@@ -13,7 +13,7 @@ import { Drawer } from "vaul";
 import Button from "./ui/Button";
 
 const Gif = () => {
-  const { userName, partyId, players, setTimer, timer, phase, setPhase } = useGlobalContext();
+  const { userName, partyId, players, setTimer, timer, phase } = useGlobalContext();
   const [gifUrl, setGifUrl] = useState<string | null>();
   const isHost = players[0]?.name === userName;
   const drawerTrigger = useRef<HTMLButtonElement>(null);
@@ -90,11 +90,14 @@ const Gif = () => {
         <div className="flex flex-col items-center mt-3 max-w-xl mx-auto md:px-6">
           <div className="flex space-x-1 md:space-x-2">
             {players.map((player, i) => (
-              <div key={i} className="w-[20px] h-[20px] md:w-[25px] md:h-[25px] bg-slate-400 rounded-full relative">
+              <div
+                key={i}
+                className="w-[20px] h-[20px] md:w-[25px] md:h-[25px] bg-slate-400 rounded-full relative -z-20"
+              >
                 {player.gifUrl && (
-                  <div className="w-full h-full relative">
-                    <TiTick className="text-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30" />
-                    <div className="w-full h-full absolute top-0 left-0 bg-green-400 opacity-50 rounded-full z-20"></div>
+                  <div className="w-full h-full relative z-10">
+                    <TiTick className="text-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20" />
+                    <div className="w-full h-full absolute top-0 left-0 bg-green-400 opacity-50 rounded-full"></div>
                   </div>
                 )}
                 <Image src={`https://api.multiavatar.com/${player.avatar}.png`} alt="avatar" fill />
@@ -115,7 +118,7 @@ const Gif = () => {
               </div>
             </Drawer.Trigger>
             <Drawer.Portal>
-              <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+              <Drawer.Overlay className="fixed inset-0 bg-black/40 " />
               <Drawer.Content className="bg-bgDark flex flex-col fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-xl">
                 <div className="bg-bgDark py-3 md:py-5 rounded-t-xl">
                   <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 " />

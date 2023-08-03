@@ -15,10 +15,12 @@ import { BiSolidExit } from "react-icons/bi";
 import LoadingPage from "@/components/ui/LoadingPage";
 import { AiFillEye } from "react-icons/ai";
 import NotFoundPage from "@/components/ui/NotFoundPage";
-import { MdInstallMobile } from "react-icons/md";
+import { MdInstallMobile, MdGroups } from "react-icons/md";
 import PageAnimation from "@/components/ui/PageAnimation";
 import { motion } from "framer-motion";
 import LogoHeader from "@/components/logo/LogoHeader";
+import PartyModal from "@/components/ui/PartyModal";
+import { toast } from "react-toastify";
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
     useGlobalContext();
@@ -27,6 +29,16 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   const [placeholder, setPlaceholder] = useState(0);
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+
+  function closeModal() {
+    setToggleModal(false);
+  }
+
+  function openModal() {
+    setToggleModal(true);
+  }
+
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
     prompt(): Promise<void>;
@@ -86,13 +98,15 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   }, [players]);
 
   const leaveParty = async () => {
-    if (party) {
+    if (party && !spectating) {
       setPageLoading(true);
       const documentRef = doc(db, "parties", partyId);
       const currentUsers = party.data()?.players;
       const updatedUsers = currentUsers.filter((user: any) => user.name !== userName);
 
       await updateDoc(documentRef, { players: updatedUsers });
+      router.push("/");
+    } else {
       router.push("/");
     }
   };
@@ -101,6 +115,8 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
   if (!party?.data()?.code) return <NotFoundPage />;
   return (
     <section className="text-center flex flex-col justify-between">
+      <PartyModal partyCode={party?.data()?.code} toggleModal={toggleModal} closeModal={closeModal} />
+
       {/* <div className="overflow-hidden">
         <div
           aria-hidden={true}
@@ -112,7 +128,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         />
       </div> */}
       <section>
-        <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
+        <header className="fixed w-full bg-bgDark top-0 left-0">
           {phase != 0 && <Timer />}
           <div className="flex justify-between items-center px-6 md:px-8 pb-4 md:pb-6 pt-4 md:pt-6">
             <div>
@@ -120,31 +136,39 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
             </div>
 
             <div className="flex text-textDark font-normal space-x-4">
-              {spectating ? (
-                <div>
+              {phase != 0 && (
+                <div
+                  className="hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
+                  onClick={openModal}
+                >
+                  <MdGroups className="text-2xl mx-auto" />
+                  <p>Party</p>
+                </div>
+              )}
+
+              <div
+                className="hover:text-orange-500 cursor-pointer transition-colors duration-200 ease-in-out"
+                onClick={leaveParty}
+              >
+                <BiSolidExit className="text-2xl mx-auto" />
+                <p>Leave</p>
+              </div>
+
+              {spectating && (
+                <div className="text-orange-500">
                   <AiFillEye className="text-2xl mx-auto" />
                   <p>Spectating</p>
                 </div>
-              ) : (
+              )}
+              {deferredPrompt && (
                 <div
-                  className="hover:text-orange-500 cursor-pointer transition-colors duration-200 ease-in-out"
-                  onClick={leaveParty}
+                  onClick={handleInstall}
+                  className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
                 >
-                  <BiSolidExit className="text-2xl mx-auto" />
-                  <p>Leave</p>
+                  <MdInstallMobile className="text-2xl mx-auto" />
+                  <p>Install</p>
                 </div>
               )}
-              <div>
-                {deferredPrompt && (
-                  <div
-                    onClick={handleInstall}
-                    className="text-textDark hover:text-primary cursor-pointer transition-colors duration-200 ease-in-out"
-                  >
-                    <MdInstallMobile className="text-2xl mx-auto" />
-                    <p>Install</p>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </header>
@@ -153,7 +177,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
           <div>
             <div className="space-y-3 md:space-y-4 mt-4 mb-10 md:mb-12">
               <p className="text-xl md:text-2xl font-bold">Party Code</p>
-              <p className="py-3 bg-bgLight inline-block tracking-[35px] pl-[35px] rounded-xl border border-gray-700">
+              <p className="py-3 bg-bgLight inline-block tracking-[35px] pl-[35px] rounded-xl border border-gray-700 text-lg md:text-xl">
                 {party?.data()?.code}
               </p>
             </div>
