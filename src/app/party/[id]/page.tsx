@@ -20,7 +20,7 @@ import PageAnimation from "@/components/ui/PageAnimation";
 import { motion } from "framer-motion";
 import LogoHeader from "@/components/logo/LogoHeader";
 import PartyModal from "@/components/ui/PartyModal";
-import { toast } from "react-toastify";
+
 const Party = ({ params: { id } }: { params: { id: string } }) => {
   const { userName, setUserName, partyId, setPartyId, setMemes, players, setPlayers, setRounds, phase, setPhase } =
     useGlobalContext();
@@ -128,7 +128,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         />
       </div> */}
       <section>
-        <header className="fixed w-full bg-bgDark top-0 left-0">
+        <header className="fixed w-full bg-bgDark top-0 left-0 z-40">
           {phase != 0 && <Timer />}
           <div className="flex justify-between items-center px-6 md:px-8 pb-4 md:pb-6 pt-4 md:pt-6">
             <div>
@@ -174,7 +174,11 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
         </header>
         <div className="mt-24 md:mt-36" />
         {phase === 0 && (
-          <div>
+          <motion.div
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
             <div className="space-y-3 md:space-y-4 mt-4 mb-10 md:mb-12">
               <p className="text-xl md:text-2xl font-bold">Party Code</p>
               <p className="py-3 bg-bgLight inline-block tracking-[35px] pl-[35px] rounded-xl border border-gray-700 text-lg md:text-xl">
@@ -186,24 +190,14 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
               <p className="text-xl md:text-2xl font-bold">Players</p>
               <div className="grid grid-cols-4 gap-4">
                 {players.map((player, i) => (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { ease: "easeInOut", duration: 0.3 },
-                    }}
-                    exit={{ opacity: 0 }}
-                    transition={{ ease: "easeInOut", duration: 0.3 }}
-                    key={i}
-                    className="flex flex-col items-center"
-                  >
+                  <div key={i} className="flex flex-col items-center">
                     <div className="w-14 h-14 lg:w-16 lg:h-16 bg-slate-400 rounded-full mb-2 relative">
                       <Image src={`https://api.multiavatar.com/${player.avatar}.png`} alt="avatar" fill />
                     </div>
                     <p className="font-normal text-textDark text-base lg:text-lg max-w-[65px] text-center">
                       {player.name}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
                 {Array.from({ length: placeholder }).map((_, index) => (
                   <motion.div
@@ -223,7 +217,7 @@ const Party = ({ params: { id } }: { params: { id: string } }) => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {phase != 0 && (

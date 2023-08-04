@@ -118,8 +118,8 @@ const Gif = () => {
               </div>
             </Drawer.Trigger>
             <Drawer.Portal>
-              <Drawer.Overlay className="fixed inset-0 bg-black/40 " />
-              <Drawer.Content className="bg-bgDark flex flex-col fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-xl">
+              <Drawer.Overlay className="fixed inset-0 bg-black/40 z-40" />
+              <Drawer.Content className="bg-bgDark flex flex-col fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-xl z-50">
                 <div className="bg-bgDark py-3 md:py-5 rounded-t-xl">
                   <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 " />
                 </div>

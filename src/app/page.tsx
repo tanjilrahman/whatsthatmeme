@@ -11,6 +11,7 @@ import LoadingPage from "@/components/ui/LoadingPage";
 import Button from "@/components/ui/Button";
 import { toast } from "react-toastify";
 import Logo from "@/components/logo/Logo";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const router = useRouter();
@@ -170,7 +171,12 @@ export default function Home() {
     return <LoadingPage />;
   } else {
     return (
-      <div className="text-center flex flex-col justify-between py-20 md:py-24 text-lg h-screen">
+      <motion.div
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="text-center flex flex-col justify-between py-20 md:py-24 text-lg h-screen"
+      >
         {/* <div className="overflow-hidden">
           <div
             aria-hidden={true}
@@ -218,7 +224,7 @@ export default function Home() {
             How to play?
           </button>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }
