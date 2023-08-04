@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const Winner = () => {
-  const { userName, players } = useGlobalContext();
+  const { players } = useGlobalContext();
   const [sortedPlayers, setSortedPlayers] = useState<PlayerInfo[]>([]);
 
   useEffect(() => {

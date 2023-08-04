@@ -55,6 +55,7 @@ const Start = () => {
         lang: "English",
         players: updatedPlayers,
         rounds: [],
+        memes: [],
       });
     }
   };

@@ -111,7 +111,7 @@ const Gif = () => {
 
           <Drawer.Root shouldScaleBackground>
             <Drawer.Trigger asChild ref={drawerTrigger}>
-              <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
+              <div className="fixed bg-bgDark w-full py-6 md:py-8 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
                 <button className="w-[295px]">
                   <Button text="Select Gif" alt={true} />
                 </button>
