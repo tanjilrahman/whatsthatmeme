@@ -28,7 +28,7 @@ export const metadata = {
     shortcut: "/icon-256x256.png",
     apple: "/icon-512x512.png",
   },
-  themeColor: "#A374FF",
+  themeColor: "#191A1F",
   manifest: "/manifest.json",
 };
 
