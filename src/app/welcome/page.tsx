@@ -101,9 +101,9 @@ const page = () => {
               ))}
             </div>
           )}
-          <div className=" flex justify-center space-x-3 bg-bgDark pt-6 border-t border-bgLight pb-10 px-6">
+          <div className=" flex justify-center space-x-3 bg-bgDark py-6 md:py-8 border-t border-bgLight pb-10 px-6">
             <button
-              className="w-full md:w-[250px] py-[15px] bg-bgLight text-textDark cursor-default rounded-xl"
+              className="w-full md:w-[250px] py-[12px] md:py-[15px] bg-bgLight text-textDark cursor-default rounded-xl"
               onClick={() => router.push("/")}
             >
               Skip

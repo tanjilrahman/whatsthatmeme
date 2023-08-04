@@ -78,13 +78,13 @@ export default function ProfileModal({ toggleModal, closeModal }: { toggleModal:
                   <div className="flex space-x-4 my-3">
                     <div
                       onClick={generateAvatar}
-                      className="rounded-xl w-full py-[8px] bg-textLight text-lg text-bgLight text-center hover:bg-primary hover:text-textLight cursor-pointer"
+                      className="rounded-xl w-full py-[8px] bg-textLight text-lg text-bgLight text-center hover:bg-primary hover:text-textLight cursor-pointer transition-colors duration-300 ease-in-out"
                     >
                       Random
                     </div>
                     <div
                       onClick={defaultAvatar}
-                      className="rounded-xl w-full py-[8px] bg-textLight text-lg text-bgLight text-center hover:bg-pink-500 hover:text-textLight cursor-pointer"
+                      className="rounded-xl w-full py-[8px] bg-textLight text-lg text-bgLight text-center hover:bg-pink-500 hover:text-textLight cursor-pointer transition-colors duration-300 ease-in-out"
                     >
                       True Avatar
                     </div>
@@ -111,7 +111,7 @@ export default function ProfileModal({ toggleModal, closeModal }: { toggleModal:
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="rounded-xl w-full py-[15px] bg-primary text-lg"
+                      className="rounded-xl w-full py-[12px] md:py-[15px] bg-primary text-lg md:text-xl hover:bg-textLight transition-colors duration-300 ease-in-out hover:text-bgDark"
                       onClick={handleSave}
                     >
                       Save

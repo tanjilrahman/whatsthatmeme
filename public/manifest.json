@@ -1,12 +1,12 @@
 {
-  "theme_color": "#A374FF",
-  "background_color": "#A374FF",
+  "theme_color": "#191A1F",
+  "background_color": "#191A1F",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "name": "What's That Meme?",
   "short_name": "WTMeme",
-  "description": "Get ready for laughter and creativity in 'What's That Meme?' - an AI-powered game where players generate hilarious memes using personalized contexts. Vote for your favorite meme to crown the champion of comedy!",
+  "description": "Get ready for laughter and creativity in 'What's That Meme?' - an AI-powered game where players generate hilarious memes using personalized contexts. Vote for your favorite meme to crown the champion!",
   "icons": [
     {
       "src": "/icon-192x192.png",

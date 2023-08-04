@@ -59,13 +59,16 @@ const Start = () => {
     }
   };
   return (
-    <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 text-xl transform -translate-x-1/2 bottom-0">
+    <div className="fixed bg-bgDark w-full py-6 md:py-8 border-t border-bgLight left-1/2 text-xl transform -translate-x-1/2 bottom-0">
       {isHost && players.length > 3 ? (
         <button className="w-[295px]" onClick={startGame}>
           <Button text={phase == 7 ? "New Game" : "Start Game"} alt={false} />
         </button>
       ) : (
-        <button onClick={startGame} className="w-[295px] py-[15px] bg-bgLight text-textDark cursor-default rounded-xl">
+        <button
+          onClick={startGame}
+          className="w-[295px] py-[12px] md:py-[15px] bg-bgLight text-textDark cursor-default rounded-xl"
+        >
           {phase == 7 ? "New Game" : "Start Game"}
         </button>
       )}

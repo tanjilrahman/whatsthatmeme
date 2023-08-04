@@ -2,7 +2,7 @@ import React from "react";
 
 const Button = ({ text, alt }: { text: string; alt: boolean }) => {
   return (
-    <button className="relative inline-flex items-center justify-start px-5 py-[15px] overflow-hidden text-xl rounded-xl group w-full">
+    <div className="relative inline-flex items-center justify-start px-5 py-[12px] md:py-[15px] overflow-hidden text-xl rounded-xl group w-full">
       <span className={`${alt ? "bg-white" : "bg-primary"} w-full h-full absolute left-0 top-0`}></span>
       <span
         className={`${
@@ -21,7 +21,7 @@ const Button = ({ text, alt }: { text: string; alt: boolean }) => {
           alt ? "hover:border-highlighter border-white" : "hover:border-white border-primary"
         } absolute inset-0 border-2  transition-colors duration-500 ease-in-out rounded-xl`}
       ></span>
-    </button>
+    </div>
   );
 };
 

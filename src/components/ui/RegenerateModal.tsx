@@ -150,8 +150,11 @@ const RegenerateModal = () => {
         </Transition>
       )}
       {
-        <div className="fixed bg-bgDark w-full pt-6 border-t border-bgLight pb-10 left-1/2 transform -translate-x-1/2 bottom-0">
-          <button className="rounded-xl w-[295px] py-[15px] bg-bgLight text-xl" onClick={() => regenerate(true)}>
+        <div className="fixed bg-bgDark w-full py-6 md:py-8 border-t border-bgLight left-1/2 transform -translate-x-1/2 bottom-0">
+          <button
+            className="rounded-xl w-[295px] py-[12px] md:py-[15px] bg-bgLight text-xl"
+            onClick={() => regenerate(true)}
+          >
             Regenerate
           </button>
         </div>

@@ -191,7 +191,7 @@ export default function Home() {
         <ProfileModal toggleModal={toggleModal} closeModal={closeModal} />
 
         <div className="mx-auto">
-          <div className="mb-5">
+          <div className="mb-4 md:mb-5">
             {userName && (
               <div className="flex text-xl items-center justify-center space-x-2 text-textDark">
                 <p>
