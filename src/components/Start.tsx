@@ -10,20 +10,20 @@ const Start = () => {
   const isHost = players[0]?.name === userName;
 
   const startGame = () => {
-    if (isHost && players.length < 4) {
-      toast.info(`Need ${4 - players.length} more player(s) to start!`, {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: true,
-        theme: "colored",
-        style: {
-          backgroundColor: "#A374FF",
-          color: "#FFFFFF",
-        },
-        progress: undefined,
-      });
-      return;
-    }
+    // if (isHost && players.length < 4) {
+    //   toast.info(`Need ${4 - players.length} more player(s) to start!`, {
+    //     position: "top-center",
+    //     autoClose: 4000,
+    //     hideProgressBar: true,
+    //     theme: "colored",
+    //     style: {
+    //       backgroundColor: "#A374FF",
+    //       color: "#FFFFFF",
+    //     },
+    //     progress: undefined,
+    //   });
+    //   return;
+    // }
 
     if (!isHost) {
       return;
@@ -60,8 +60,8 @@ const Start = () => {
     }
   };
   return (
-    <div className="fixed bg-bgDark w-full py-6 md:py-8 border-t border-bgLight left-1/2 text-xl transform -translate-x-1/2 bottom-0">
-      {isHost && players.length > 3 ? (
+    <div className="fixed bottom-0 w-full py-6 text-xl transform -translate-x-1/2 border-t bg-bgDark md:py-8 border-bgLight left-1/2">
+      {isHost ? (
         <button className="w-[295px]" onClick={startGame}>
           <Button text={phase == 7 ? "New Game" : "Start Game"} alt={false} />
         </button>
