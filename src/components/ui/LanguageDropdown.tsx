@@ -1,33 +1,34 @@
+import { useEffect, useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { TiTick } from "react-icons/ti";
 
-export default function LanguageDropdown({
-  isHost,
-  lang,
-  handleSetLang,
-}: {
-  isHost: boolean;
-  lang: string;
-  handleSetLang: (lang: string) => void;
-}) {
+export default function LanguageDropdown({ isHost }: { isHost: boolean }) {
+  const [lang, setLang] = useState("English");
+
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
+
   return (
-    <div className="flex justify-end -mt-8 mb-4 md:mb-6">
-      <div className="dropdown text-sm md:text-base font-normal inline-block relative">
-        <button className="bg-bgLit border border-gray-600 text-gray-400 font-semibold py-2 px-3 rounded-lg inline-flex items-center">
-          <BsStars className="text-base md:text-lg text-yellow-500 opacity-70" />
-          <span className="ml-1">Language</span>
+    <div className="flex items-center">
+      <div className="relative inline-block text-sm font-normal dropdown md:text-base">
+        <button className="inline-flex items-center px-3 py-1 font-medium text-gray-400 border border-gray-600 rounded-lg bg-bgLit">
+          <BsStars className="text-base text-yellow-500 md:text-lg opacity-70" />
+          <span className="ml-1">{isHost ? lang : "Language"}</span>
         </button>
-        <ul className="dropdown-menu absolute hidden text-gray-300 pt-1 text-left w-40 md:w-48 right-0">
+        <ul className="absolute right-0 hidden w-40 pt-1 text-left text-gray-300 dropdown-menu md:w-48">
           <li className="">
             <a
               className={`${
                 isHost && lang == "English" ? "bg-primary" : "bg-bgLight"
               } rounded-t  border border-gray-700  py-2 px-4 whitespace-no-wrap flex justify-between items-center cursor-default`}
               href="#"
-              onClick={() => isHost && handleSetLang("English")}
+              onClick={() => isHost && setLang("English")}
             >
               <span>English</span>
-              {lang == "English" && <TiTick className="text-base md:text-lg text-yellow-500 -mr-2" />}
+              {lang == "English" && isHost && (
+                <TiTick className="-mr-2 text-base text-yellow-500 md:text-lg" />
+              )}
             </a>
           </li>
           <li className="">
@@ -36,7 +37,7 @@ export default function LanguageDropdown({
                 isHost && lang == "Bangla" ? "bg-primary" : "bg-bgLight"
               } rounded-b  border border-gray-700  py-2 px-4 whitespace-no-wrap flex justify-between items-center cursor-default`}
               href="#"
-              onClick={() => isHost && handleSetLang("Bangla")}
+              onClick={() => isHost && setLang("Bangla")}
             >
               <div>
                 <span>Bangla</span>
@@ -45,11 +46,13 @@ export default function LanguageDropdown({
                     lang == "Bangla" ? "bg-primary" : "bg-bgLight"
                   }  italic px-1 rounded-lg text-xs text-yellow-400 border border-yellow-400 ml-1`}
                 >
-                  Beta
+                  Pro
                 </span>
               </div>
 
-              {lang == "Bangla" && <TiTick className="text-base md:text-lg text-yellow-500 -mr-2" />}
+              {lang == "Bangla" && isHost && (
+                <TiTick className="-mr-2 text-base text-yellow-500 md:text-lg" />
+              )}
             </a>
           </li>
         </ul>

@@ -2,13 +2,13 @@ import { db } from "@/config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { pickRandomPlayers } from "./functions";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const retryDelay = 500; // Delay in milliseconds before retrying
 
 export default async function createContext(
   players: PlayerInfo[],
   partyId: string,
-  lang?: string,
   maxRetries = 2
 ): Promise<void> {
   let retries = 0;
@@ -20,7 +20,7 @@ export default async function createContext(
           body: JSON.stringify({
             contextOne: pickRandomPlayers(players.map((player) => player.name)),
             contextTwo: pickRandomPlayers(players.map((player) => player.name)),
-            lang,
+            lang: localStorage.getItem("lang"),
           }),
           method: "POST",
           headers: {
